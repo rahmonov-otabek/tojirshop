@@ -22,7 +22,26 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'category.action')
+            ->addColumn('action', function($query){
+                $editBtn = "<a href='".route('admin.category.edit', $query->id)."' class='btn btn-primary'>
+                <i class='far fa-edit'></i></i> </a>";
+                $deleteBtn = "<a href='".route('admin.category.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'>
+                <i class='far fa-trash-alt'></i></i> </a>";
+                return $editBtn.$deleteBtn;
+            })
+            ->addColumn('icon', function($query){
+                return '<i style="font-size: 40px" class="'.$query->icon.'"></i>';
+            })
+            ->addColumn('status', function($query){
+                $active = '<i class="badge badge-success">Active</i>';
+                $inactive = '<i class="badge badge-danger">Inactive</i>';
+                if($query->status == 1){
+                    return $active;
+                }else{
+                    return $inactive;
+                }
+            }) 
+            ->rawColumns(['action', 'icon', 'status'])
             ->setRowId('id');
     }
 
@@ -61,16 +80,16 @@ class CategoryDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        return [ 
+            Column::make('id')->width(100),
+            Column::make('icon'),
+            Column::make('name'), 
+            Column::make('status'),  
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(200)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 
