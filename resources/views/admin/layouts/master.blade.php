@@ -124,7 +124,7 @@
                 type: 'DELETE',
                 url: deleteUrl,
                 
-                succes: function(data){
+                success: function(data){
                   if(data.status == 'success'){
                       Swal.fire(
                         "Deleted!",
@@ -134,7 +134,8 @@
                   }else if(data.status == 'error'){
                     Swal.fire(
                         "Cant Delete",
-                        data.message
+                        data.message,
+                        'error'
                     )
                   } 
                 },
