@@ -1,6 +1,7 @@
 <?php 
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -28,3 +29,6 @@ Route::resource('sub-category', SubCategoryController::class);
 /** Child Category routes */
 Route::get('get-subcategories', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
 Route::resource('child-category', ChildCategoryController::class);
+
+/** Brand routes */
+Route::resource('brand', BrandController::class);
