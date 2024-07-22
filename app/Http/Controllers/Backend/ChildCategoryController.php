@@ -73,7 +73,11 @@ class ChildCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::all();
+        $childcategory = ChildCategory::findOrFail($id);
+        $subCategories = SubCategory::where('category_id', $childcategory->category_id)->get();
+
+        return view('admin.child-category.edit', compact('childcategory', 'categories', 'subCategories')); 
     }
 
     /**
@@ -81,7 +85,24 @@ class ChildCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'category' => ['required'], 
+            'sub_category' => ['required'], 
+            'name' => ['required', 'max:200', 'unique:sub_categories,name,'.$id], 
+            'status' => ['required'],
+        ]);
+
+        $childcategory = ChildCategory::findOrFail($id);
+ 
+        $childcategory->category_id = $request->category;
+        $childcategory->sub_category_id = $request->sub_category;
+        $childcategory->name = $request->name; 
+        $childcategory->slug = Str::slug($request->name); 
+        $childcategory->status = $request->status;
+        $childcategory->save();
+
+        toastr('Updated Successfully!', 'success');
+        return redirect()->route('admin.child-category.index');
     }
 
     /**
@@ -89,6 +110,9 @@ class ChildCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $childcategory = ChildCategory::findOrFail($id);
+        $childcategory->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 }

@@ -80,13 +80,13 @@ class SubCategoryController extends Controller
             'status' => ['required'],
         ]);
 
-        $slider = SubCategory::findOrFail($id);
+        $subcategory = SubCategory::findOrFail($id);
  
-        $slider->category_id = $request->category;
-        $slider->name = $request->name; 
-        $slider->slug = Str::slug($request->name); 
-        $slider->status = $request->status;
-        $slider->save();
+        $subcategory->category_id = $request->category;
+        $subcategory->name = $request->name; 
+        $subcategory->slug = Str::slug($request->name); 
+        $subcategory->status = $request->status;
+        $subcategory->save();
 
         toastr('Updated Successfully!', 'success');
         return redirect()->route('admin.sub-category.index');
