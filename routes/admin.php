@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -23,3 +24,7 @@ Route::resource('category', CategoryController::class);
 
 /** Sub Category routes */
 Route::resource('sub-category', SubCategoryController::class);
+
+/** Child Category routes */
+Route::get('get-subcategories', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
+Route::resource('child-category', ChildCategoryController::class);
