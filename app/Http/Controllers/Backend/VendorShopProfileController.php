@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Vendor;
 use Illuminate\Http\Request;
-use App\Traits\ImageUploadTrait;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\ImageUploadTrait;
 
-class AdminVendorProfileController extends Controller
+
+class VendorShopProfileController extends Controller
 {
     use ImageUploadTrait;
     /**
@@ -17,7 +18,7 @@ class AdminVendorProfileController extends Controller
     public function index()
     {
         $profile = Vendor::where('user_id', Auth::user()->id)->first();
-        return view('admin.vendor-profile.index', compact('profile'));
+        return view('vendor.shop-profile.index', compact('profile'));
     }
 
     /**
