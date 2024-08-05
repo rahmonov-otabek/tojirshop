@@ -43,7 +43,7 @@ class VendorProductDataTable extends DataTable
                             <i class="fas fa-cog"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item has-icon" href="'.route('admin.product-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a></li>
+                            <li><a class="dropdown-item has-icon" href="'.route('vendor.product-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a></li>
                             <li><a class="dropdown-item has-icon" href="'.route('admin.product-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a></li>
                         </ul>
                         </div>';
