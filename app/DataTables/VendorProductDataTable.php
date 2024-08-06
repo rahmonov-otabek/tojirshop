@@ -52,6 +52,15 @@ class VendorProductDataTable extends DataTable
                 return $inactive;
             }
         })
+        ->addColumn('approved', function($query){
+            $approved = '<i class="badge bg-success">Approved</i>';
+            $pending = '<i class="badge bg-warning">Pending</i>';
+            if($query->is_approved == 1){
+                return $approved;
+            }else{
+                return $pending;
+            }
+        })
         ->addColumn('type', function($query){ 
             switch($query->product_type){
                 case 'new_arrival':
@@ -71,7 +80,7 @@ class VendorProductDataTable extends DataTable
                     break;
             }
         })
-        ->rawColumns(['image', 'action', 'status', 'type'])
+        ->rawColumns(['image', 'action', 'status', 'type', 'approved'])
         ->setRowId('id');
     }
 
@@ -114,6 +123,7 @@ class VendorProductDataTable extends DataTable
             Column::make('image')->width(150), 
             Column::make('name'), 
             Column::make('price'), 
+            Column::make('approved'), 
             Column::make('type')->width(100), 
             Column::make('status'), 
             Column::computed('action')
