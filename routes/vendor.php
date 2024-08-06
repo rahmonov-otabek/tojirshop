@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProductImageGalleryController;
+use App\Http\Controllers\Backend\VendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProfileController;
 use App\Http\Controllers\Backend\VendorShopProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,20 @@ Route::resource('product', VendorProductController::class);
 
 /** Product image routes */
 Route::resource('product-image-gallery', VendorProductImageGalleryController::class);
+
+/** Product variant routes */
+Route::resource('product-variant', VendorProductVariantController::class);
+
+/** Product variant item */
+// Route::get('product-variant-item/{productId}/{variantId}', [ProductVariantItemController::class, 'index'])
+//     ->name('product-variant-item.index');
+// Route::get('product-variant-item/create/{productId}/{variantId}', [ProductVariantItemController::class, 'create'])
+//     ->name('product-variant-item.create');
+// Route::post('product-variant-item', [ProductVariantItemController::class, 'store'])
+//     ->name('product-variant-item.store');
+// Route::get('product-variant-item-edit/{variantItemId}', [ProductVariantItemController::class, 'edit'])
+//     ->name('product-variant-item.edit');
+// Route::put('product-variant-item-update/{variantItemId}', [ProductVariantItemController::class, 'update'])
+//     ->name('product-variant-item.update');
+// Route::delete('product-variant-item/{variantItemId}', [ProductVariantItemController::class, 'destroy'])
+//     ->name('product-variant-item.destroy');

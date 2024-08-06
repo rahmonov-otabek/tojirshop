@@ -28,23 +28,14 @@ class VendorProductDataTable extends DataTable
             $editBtn = "<a href='".route('vendor.product.edit', $query->id)."' class='btn btn-primary'>
             <i class='far fa-edit'></i></i> </a>";
             $deleteBtn = "<a href='".route('vendor.product.destroy', $query->id)."' class='btn btn-danger delete-item'>
-            <i class='far fa-trash-alt'></i></i> </a>";
-            // $moreBtn = '<div class="dropdown dropleft ml-1 d-inline">
-            //       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            //         <i class="fas fa-cog"></i>
-            //       </button>
-            //       <div class="dropdown-menu">
-            //         <a class="dropdown-item has-icon" href="'.route('admin.product-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
-            //         <a class="dropdown-item has-icon" href="'.route('admin.product-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a>
-            //       </div>
-            //     </div>';
+            <i class='far fa-trash-alt'></i></i> </a>"; 
             $moreBtn = '<div class="btn-group dropstart" style="margin-left: 3px">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item has-icon" href="'.route('vendor.product-image-gallery.index', ['product' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a></li>
-                            <li><a class="dropdown-item has-icon" href="'.route('admin.product-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a></li>
+                            <li><a class="dropdown-item has-icon" href="'.route('vendor.product-variant.index', ['product' => $query->id]).'"><i class="far fa-file"></i> Variants</a></li>
                         </ul>
                         </div>';
             return $editBtn.$deleteBtn.$moreBtn;
