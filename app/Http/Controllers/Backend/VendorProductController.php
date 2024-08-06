@@ -176,7 +176,29 @@ class VendorProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
+
+        $this->deleteImage($product->thumb_image);
+
+        $gallery_images = ProductImageGallery::where('product_id', $product->id)->get();
+
+        foreach($gallery_images as $image){
+            $this->deleteImage($image->image);
+            $image->delete();
+        }
+ 
+        $variants = ProductVariant::where('product_id', $product->id)->get();
+        foreach($variants as $variant){
+            $variant->productVariantItems()->delete();
+            $variant->delete();
+        }
+
+        $product->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
     
     public function getSubCategories(Request $request)
