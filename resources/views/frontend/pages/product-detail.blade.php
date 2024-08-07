@@ -261,9 +261,9 @@
                             <a class="title" href="javascript:;">{{ $product->name}}</a>
                             <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                             @if (checkDiscount($product))
-                                <h4>${{ $product->offer_price }} <del>${{ $product->price }}</del></h4> 
+                                <h4>{{ $settings->currency_icon }}{{ $product->offer_price }} <del>{{ $settings->currency_icon }}{{ $product->price }}</del></h4> 
                             @else
-                                <h4>${{ $product->offer_price }}</h4> 
+                                <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}</h4> 
                             @endif 
                             <p class="review">
                                 <i class="fas fa-star"></i>
@@ -282,7 +282,7 @@
                                             <h5 class="mb-2">{{ $variant->name }}:</h5>
                                             <select class="select_2" name="state">
                                                 @foreach ($variant->productVariantItems as $variantItem)
-                                                    <option {{ $variantItem->is_default == 1 ? 'selected' : ''}}>{{ $variantItem->name }} (${{ $variantItem->price}})</option> 
+                                                    <option {{ $variantItem->is_default == 1 ? 'selected' : ''}}>{{ $variantItem->name }} ({{ $settings->currency_icon }}{{ $variantItem->price}})</option> 
                                                 @endforeach
                                             </select>
                                         </div> 

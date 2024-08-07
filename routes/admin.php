@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SellerProductController;
+use App\Http\Controllers\Backend\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /** Admin routes */
@@ -77,3 +78,7 @@ Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct']
 Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home.change-status');
 Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
+
+/** Settings routes */
+Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::put('general-settings-update', [SettingsController::class, 'generalSettinsUpdate'])->name('general-settings-update');

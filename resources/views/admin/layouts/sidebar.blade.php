@@ -65,6 +65,9 @@
             <li class="{{ setActive(['admin.slider.*'])}}"><a class="nav-link" href="{{ route('admin.slider.index')}}">Slider</a></li>
           </ul>
         </li>
+
+        <li><a class="nav-link" href="{{ route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
+
         {{-- <li class="dropdown">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
           <ul class="dropdown-menu">
