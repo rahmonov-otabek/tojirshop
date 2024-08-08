@@ -59,4 +59,11 @@ class CartController extends Controller
 
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
     }
+
+    public function cartDetail()
+    {
+        $cartItems = Cart::content();
+
+        return view('frontend.pages.cart-detail', compact('cartItems'));
+    }
 }
