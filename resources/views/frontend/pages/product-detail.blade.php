@@ -813,6 +813,19 @@
                     },
                 });
             });
+            function getCartCount(){
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('cart-count') }}',
+                    
+                    success: function(data) {
+                        $('#cart-count').text(data);
+                    },
+                    error: function(xhr) {
+                        // Handle error response
+                    },
+                });
+            }
         });
     </script>
 @endpush
