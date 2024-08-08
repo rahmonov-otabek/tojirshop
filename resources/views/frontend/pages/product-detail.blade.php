@@ -279,14 +279,17 @@
                             </p>
                             <p class="description"> {!! $product->short_description !!}</p>
  
+                            <form class="shopping-cart-form">
+                              
                             <div class="wsus__selectbox">
                                 <div class="row">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     @foreach ($product->variants as $variant)
                                         <div class="col-xl-6 col-sm-6">
                                             <h5 class="mb-2">{{ $variant->name }}:</h5>
-                                            <select class="select_2" name="state">
+                                            <select class="select_2" name="variant_items[]">
                                                 @foreach ($variant->productVariantItems as $variantItem)
-                                                    <option {{ $variantItem->is_default == 1 ? 'selected' : ''}}>{{ $variantItem->name }} ({{ $settings->currency_icon }}{{ $variantItem->price}})</option> 
+                                                    <option value="{{ $variantItem->id }}" {{ $variantItem->is_default == 1 ? 'selected' : ''}}>{{ $variantItem->name }} ({{ $settings->currency_icon }}{{ $variantItem->price}})</option> 
                                                 @endforeach
                                             </select>
                                         </div> 
@@ -295,17 +298,19 @@
                             </div>
                             <div class="wsus__quentity">
                                 <h5>quentity :</h5>
-                                <form class="select_number">
-                                    <input class="number_area" type="text" min="1" max="100" value="1" />
-                                </form> 
+                                <div class="select_number">
+                                    <input class="number_area" name="qty" type="text" min="1" max="100" value="1" />
+                                </div> 
                             </div>
                             
                             <ul class="wsus__button_area">
-                                <li><a class="add_cart" href="#">add to cart</a></li>
+                                <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                 <li><a class="buy_now" href="#">buy now</a></li>
                                 <li><a href="#"><i class="fal fa-heart"></i></a></li>
                                 <li><a href="#"><i class="far fa-random"></i></a></li>
                             </ul> 
+                              
+                        </form>
                             <p class="brand_model"><span>brand : </span>{{ $product->brand->name }}</p>
                             {{-- <div class="wsus__pro_det_share">
                                 <h5>share :</h5>
@@ -615,7 +620,7 @@
     <!--============================
         RELATED PRODUCT START
     ==============================-->
-    <section id="wsus__flash_sell">
+    {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -776,8 +781,38 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--============================
         RELATED PRODUCT END
     ==============================-->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.shopping-cart-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+                
+                $.ajax({
+                    type: 'POST',
+                    data: formData,
+                    url: '{{ route('add-to-cart') }}',
+                    
+                    success: function(data) {
+                        // Handle success response
+                    },
+                    error: function(xhr) {
+                        // Handle error response
+                    },
+                });
+            });
+        });
+    </script>
+@endpush
