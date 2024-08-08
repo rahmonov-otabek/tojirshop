@@ -32,6 +32,7 @@ Route::get('product-detail/{slug}', [FrontendProductController::class, 'showProd
 /** Add to cart route */
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('cart-detail', [CartController::class, 'cartDetail'])->name('cart-detail');
+Route::post('cart/update-quantity', [CartController::class, 'updateProductQty'])->name('cart.update-quantity');
 
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
